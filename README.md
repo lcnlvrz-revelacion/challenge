@@ -1,81 +1,51 @@
-# Turborepo starter
+# Desafio
 
-This is an official starter Turborepo.
+El desafió consta de armar una plataforma en donde los usuarios pueden visualizar y editar una biblioteca centralizada de libros
 
-## Using this example
+Para poder lograr eso, se necesita que:
 
-Run the following command:
+- Se pueda visualizar los libros que forman parte de la biblioteca
+- Permitir a los usuarios agregar un libro a la biblioteca
+- Permitir a los usuarios actualizar un libro ya existente
+- Eliminar un libro de la biblioteca
+- Cuando un mismo usuario (basado en el correo) publica +2 libros, se envía un correo de agradecimiento por las contribuciones a la biblioteca. Este servicio ya se encuentra implementado (`mailer.service.ts`)
 
-```sh
-npx create-turbo@latest
-```
+## Entidades
 
-## What's inside?
+La entidad principal con la cual se va a trabajar es `book entity`. Esta entidad cuenta con los siguientes atributos:
 
-This Turborepo includes the following packages/apps:
+- ID (autogenerado)
+- Title
+- Author
+- Published Date (validación de fecha)
+- Genre (enum: fiction, narrative, mystery, novel)
+- Description (max: 256 caracteres)
+- Created by email (email validation)
 
-### Apps and Packages
+## Stack a usar
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+Como se puede observar en el layout del proyecto se trata de una app monolita en donde el back es en node (nestjs) y el front es en react (next.js)
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+En cuanto a lo que son librerías de componentes, state managment, data fetching se encuentran instaladas los siguientes paquetes:
 
-### Utilities
+- tailwindcss + radix-ui (ui pkg)
+- react-hook-form (formularios)
+- zod (validacion de datos)
+- zustand
+- react-query
 
-This Turborepo has some additional tools already setup for you:
+Lo que es a nivel backend se requiere implementar la capa de persistencia usando la base de datos mongodb.
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+Se encuentra instalado el orm mongoose para facilitar la implementación e interacción con la base de datos
 
-### Build
+También se encuentra el pkg class-validator para validar datos de la solicitud
 
-To build all apps and packages, run the following command:
+## Edge cases
 
-```
-cd my-turborepo
-pnpm build
-```
+Cuando un usuario publica mas de 2 libros en la biblioteca, se debe enviar un correo (mailer.service.ts) en forma de agradecimiento por las contribuciones a la biblioteca.
 
-### Develop
+El problema es que al momento de enviar el correo, el proveedor de mensajería tiene una latencia de mas de 10 segundos
 
-To develop all apps and packages, run the following command:
+Ninguna request puede tomar mas de 1 segundo en procesarse
 
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+En cuanto al envío del correo, es tolerable un delay y una eventual consistencia
