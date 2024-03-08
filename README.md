@@ -49,3 +49,12 @@ El problema es que al momento de enviar el correo, el proveedor de mensajería t
 Ninguna request puede tomar mas de 1 segundo en procesarse
 
 En cuanto al envío del correo, es tolerable un delay y una eventual consistencia
+
+## Setup
+
+nodejs version: v18.17.0
+
+```
+npm i
+npm run dev
+```
