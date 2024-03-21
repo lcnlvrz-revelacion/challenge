@@ -34,7 +34,7 @@ En cuanto a lo que son librerías de componentes, state managment, data fetching
 - zustand
 - react-query
 
-Lo que es a nivel backend se requiere implementar la capa de persistencia usando la base de datos mongodb.
+Lo que es a nivel backend se requiere implementar la capa de persistencia usando la base de datos mongodb.c
 
 Se encuentra instalado el orm mongoose para facilitar la implementación e interacción con la base de datos
 
