@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "dev:mongo:spa": "turbo dev:mongo:spa",
+    "dev:mysql:spa": "turbo dev:mysql:spa",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""

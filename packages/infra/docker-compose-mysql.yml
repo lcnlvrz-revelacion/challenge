@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: 'admin'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'admin'
+      MYSQL_ROOT_PASSWORD: 'admin'
+    ports:
+      - '3307:3306'
+    volumes:
+      - mysql_data_container:/var/lib/mysql
+    extra_hosts:
+      - 'docker.localhost:host-gateway'
+
+volumes:
+  mysql_data_container:

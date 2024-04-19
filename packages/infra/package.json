@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "docker compose up || docker-compose up"
+    "dev:mongo": "docker compose -f ./docker-compose-mongo.yml up || docker-compose -f ./docker-compose-mongo.yml up",
+    "dev:mongo:spa": "npm run dev:mongo",
+    "dev:mongo:next": "npm run dev:mongo",
+    "dev:mysql": "docker compose -f ./docker-compose-mysql.yml up || docker-compose -f ./docker-compose-mysql.yml up",
+    "dev:mysql:spa": "npm run dev:mysql",
+    "dev:mysql:next": "npm run dev:mysql"
   },
   "keywords": [],
   "author": "Luciano Alvarez",
