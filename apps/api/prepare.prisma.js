@@ -19,18 +19,36 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
 fs.writeFileSync(
   './src/prisma.module.ts',
   `
-import { Global, Module } from "@nestjs/common";
+import { Global, Module } from '@nestjs/common';
+import { PrismaService } from './prisma.service';
 
 @Global()
 @Module({
-  providers:[
-    PrismaService
-  ],
-  exports:[
-    PrismaService
-  ]
+  providers: [PrismaService],
+  exports: [PrismaService],
 })
 export class PrismaModule {}
+  
+`,
+);
 
+fs.writeFileSync(
+  '.env',
+  `
+DATABASE_URL="mysql://admin:admin@localhost:3306/admin"
+`,
+);
+
+fs.writeFileSync(
+  './prisma/schema.prisma',
+  `
+  generator client {
+    provider = "prisma-client-js"
+  }
+  
+  datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+  }
 `,
 );

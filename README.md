@@ -41,7 +41,7 @@ En cuanto a como debe lucir la ui y los componentes para implementar la vista de
 Para implementar estos requerimientos el stack a utilizar no es estático y rígido. Unicamente se requiere como baseline el uso de nestjs del lado de la api y react del lado del frontend. Dicho esto, se
 puede usar:
 
-> :warning: **EN CASO DE USAR PRISMA**: Correr el comando `npm run prepare:prisma`. Luego para sincronizar los modelos definidos: usar `npm run prisma:push`
+> :warning: **EN CASO DE USAR PRISMA**: Correr el comando `npm run prisma:prepare`. Luego para sincronizar los modelos definidos: usar `npm run prisma:push`
 
 | DATABASE | ORM       | FRONTEND |
 | -------- | --------- | -------- |
