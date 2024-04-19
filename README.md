@@ -90,6 +90,8 @@ npm run dev:mysql:next
 
 Una vez ejecutado el comando, el cliente se encontrara up and running en el puerto `3002`. La api lo estará en el puerto `3001`
 
+Una vez decidido que orm usar para implementar la capa de persistencia, se debe descomentar el modulo del orm seleccionado dentro de `app.module.ts`
+
 Se requiere que el candidato comparta pantalla en una ventana del browser que se encuentre en el puerto 3002. De esta manera el entrevistador podrá ver los cambios en tiempo real del frontend
 
 ## Side notes
