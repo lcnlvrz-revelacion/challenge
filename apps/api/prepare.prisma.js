@@ -15,3 +15,22 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
 
 `,
 );
+
+fs.writeFileSync(
+  './src/prisma.module.ts',
+  `
+import { Global, Module } from "@nestjs/common";
+
+@Global()
+@Module({
+  providers:[
+    PrismaService
+  ],
+  exports:[
+    PrismaService
+  ]
+})
+export class PrismaModule {}
+
+`,
+);

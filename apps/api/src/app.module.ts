@@ -30,6 +30,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     //   password: 'admin',
     //   database: 'admin',
     //   models: [],
+    //   synchronize:true,
     // }),
 
     //UNCOMMENT THIS TO USE TYPEORM
