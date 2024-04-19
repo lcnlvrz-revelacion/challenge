@@ -1,6 +1,6 @@
 # Desafio
 
-El desafió consta de armar una plataforma en donde los usuarios pueden visualizar y editar una biblioteca centralizada de libros
+El desafío consta de armar una plataforma en donde los usuarios pueden visualizar y editar una biblioteca centralizada de libros
 
 Para poder lograr eso, se necesita que:
 
@@ -22,11 +22,43 @@ La entidad principal con la cual se va a trabajar es `book entity`. Esta entidad
 - Description (max: 256 caracteres)
 - Created by email (email validation)
 
-## Stack a usar
+## Edge cases
 
-Como se puede observar en el layout del proyecto se trata de una app monolita en donde el back es en node (nestjs) y el front es en react (next.js)
+Cuando un usuario publica mas de 2 libros en la biblioteca, se debe enviar un correo (mailer.service.ts) en forma de agradecimiento por las contribuciones a la biblioteca.
+
+El problema es que al momento de enviar el correo, el proveedor de mensajería tiene una latencia de mas de 10 segundos
+
+Ninguna request puede tomar mas de 1 segundo en procesarse (global api threshold)
+
+En cuanto al envío del correo, es tolerable un delay y una eventual consistencia
+
+## UI
+
+En cuanto a como debe lucir la ui y los componentes para implementar la vista de los libros, formularios y demás acciones: **a criterio del candidato**
+
+## Stack Flavors
+
+Para implementar estos requerimientos el stack a utilizar no es estático y rígido. Unicamente se requiere como baseline el uso de nestjs del lado de la api y react del lado del frontend. Dicho esto, se
+puede usar:
+
+> :warning: **EN CASO DE USAR PRISMA**: Correr el comando `npm run prepare:prisma`. Luego para sincronizar los modelos definidos: usar `npm run prisma:push`
+
+| DATABASE | ORM       | FRONTEND |
+| -------- | --------- | -------- |
+| MONGODB  | MONGOOSE  | NEXTJS   |
+| MONGODB  | MONGOOSE  | SPA      |
+| MYSQL    | TYPEORM   | NEXTJS   |
+| MYSQL    | TYPEORM   | SPA      |
+| MYSQL    | SEQUELIZE | NEXTJS   |
+| MYSQL    | SEQUELIZE | SPA      |
+| MYSQL    | PRISMA    | NEXTJS   |
+| MYSQL    | PRISMA    | SPA      |
+
+## Frontend Libraries
 
 En cuanto a lo que son librerías de componentes, state managment, data fetching se encuentran instaladas los siguientes paquetes:
+
+> :warning: En caso de no sentirse confiado para usar estas librerias, se puede instalar algun alternativa (e.g: en lugar de usar react-hook-form el candidato desea usar formik 👍)
 
 - tailwindcss + radix-ui (ui pkg)
 - react-hook-form (formularios)
@@ -34,27 +66,32 @@ En cuanto a lo que son librerías de componentes, state managment, data fetching
 - zustand
 - react-query
 
-Lo que es a nivel backend se requiere implementar la capa de persistencia usando la base de datos mongodb.c
-
-Se encuentra instalado el orm mongoose para facilitar la implementación e interacción con la base de datos
-
-También se encuentra el pkg class-validator para validar datos de la solicitud
-
-## Edge cases
-
-Cuando un usuario publica mas de 2 libros en la biblioteca, se debe enviar un correo (mailer.service.ts) en forma de agradecimiento por las contribuciones a la biblioteca.
-
-El problema es que al momento de enviar el correo, el proveedor de mensajería tiene una latencia de mas de 10 segundos
-
-Ninguna request puede tomar mas de 1 segundo en procesarse
-
-En cuanto al envío del correo, es tolerable un delay y una eventual consistencia
-
 ## Setup
+
+> :warning: **Asegurarse que docker engine se encuentre activo previo a correr los comandos**
 
 nodejs version: v18.17.0
 
 ```
 npm i
-npm run dev
+
+# If you decided to go with react spa + mongodb
+npm run dev:mongo:spa
+
+# If you decided to go with react nextjs + mongodb
+npm run dev:mongo:next
+
+# If you decided to go with react spa + mysql
+npm run dev:mysql:spa
+
+# If you decided to go with react nextjs + mysql
+npm run dev:mysql:next
 ```
+
+Una vez ejecutado el comando, el cliente se encontrara up and running en el puerto `3002`. La api lo estará en el puerto `3001`
+
+Se requiere que el candidato comparta pantalla en una ventana del browser que se encuentre en el puerto 3002. De esta manera el entrevistador podrá ver los cambios en tiempo real del frontend
+
+## Side notes
+
+Es importante que el candidato vaya narrando la linea de pensamientos y decisiones que va teniendo a lo largo de la entrevista

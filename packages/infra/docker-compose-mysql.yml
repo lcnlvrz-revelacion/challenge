@@ -1,7 +1,7 @@
 version: '3.7'
 services:
-  mysql:
-    container_name: mysql
+  mysql-challenge:
+    container_name: mysql-challenge
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: 'admin'
