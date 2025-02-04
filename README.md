@@ -70,9 +70,15 @@ En cuanto a lo que son librerías de componentes, state managment, data fetching
 
 > :warning: **Asegurarse que docker engine se encuentre activo previo a correr los comandos**
 
+> :warning: **Ejecutar los siguientes comandos en la terminal de vscode (asegurarse que tiene permisos de compartir en liveshare)**
+
 nodejs version: v18.17.0
 
 ```
+# Switch to node v18
+nvm use 18
+
+# Install dependencies
 npm i
 
 # If you decided to go with react spa + mongodb

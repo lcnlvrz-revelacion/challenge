@@ -6,9 +6,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MailerService } from './mailer.service';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DatabaseModule } from './modules/database/database.module';
 
 @Module({
   imports: [
+    DatabaseModule,
     ConfigModule.forRoot({
       envFilePath: ['.env.development'],
     }),

@@ -50,5 +50,9 @@ const LINKS = [
 ]
 
 export default function Page(): JSX.Element {
-  return <div></div>
+  return (
+    <div>
+      <p>testing</p>
+    </div>
+  )
 }
