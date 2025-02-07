@@ -21,8 +21,9 @@ export class DatabaseService
   implements OnModuleInit, OnModuleDestroy
 {
   async onModuleInit() {
-    await this.$connect();
     console.log('connected to db');
+
+    await this.$connect();
   }
 
   async onModuleDestroy() {
